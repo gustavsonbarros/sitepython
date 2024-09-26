@@ -1,0 +1,345 @@
+﻿Aprendizado de máquina é sobre extrair conhecimento de dados. É um campo de pesquisa na interseção de estatísticas, inteligência artificial e ciência da computação, também conhecido como análise preditiva ou aprendizado estatístico. A aplicação de métodos de aprendizado de máquina tornou-se, nos últimos anos, onipresente na vida cotidiana. Desde recomendações automáticas de quais filmes assistir, o que comer ou quais produtos comprar, até rádios online personalizadas e reconhecimento de seus amigos nas fotos, muitos sites e dispositivos modernos têm algoritmos de aprendizado de máquina em seu núcleo. Quando você olha para um site complexo como Facebook, Amazon ou Netflix, é muito provável que cada parte do site contenha múltiplos modelos de aprendizado de máquina.
+Fora das aplicações comerciais, o aprendizado de máquina teve uma tremenda influência na forma como a pesquisa orientada por dados é feita hoje. As ferramentas introduzidas neste livro foram aplicadas a diversos problemas científicos, como entender estrelas, encontrar planetas distantes, descobrir novas partículas, analisar sequências de DNA e fornecer tratamentos personalizados para o câncer.
+Sua aplicação não precisa ser tão em larga escala ou mudar o mundo como esses exemplos para se beneficiar do aprendizado de máquina. Neste capítulo, explicaremos por que o aprendizado de máquina se tornou tão popular e discutiremos que tipos de problemas podem ser resolvidos usando aprendizado de máquina. Em seguida, mostraremos como construir seu primeiro modelo de aprendizado de máquina, introduzindo conceitos importantes ao longo do caminho.
+Por que Aprendizado de Máquina?
+Nos primeiros dias das aplicações "inteligentes", muitos sistemas usavam regras codificadas manualmente de decisões "se" e "senão" para processar dados ou ajustar-se à entrada do usuário. Pense em um filtro de spam cujo trabalho é mover as mensagens de e-mail apropriadas para uma pasta de spam. Você poderia criar uma lista negra de palavras que resultariam em um e-mail sendo marcado como spam.
+Isso seria um exemplo de uso de um sistema de regras projetado por especialistas para criar uma aplicação “inteligente”. Elaborar manualmente regras de decisão é viável para algumas aplicações, particularmente aquelas em que os humanos têm uma boa compreensão do processo a ser modelado. No entanto, usar regras codificadas manualmente para tomar decisões tem duas desvantagens principais:
+    • A lógica necessária para tomar uma decisão é específica para um único domínio e tarefa. Mudar a tarefa, mesmo que ligeiramente, pode exigir a reescrita de todo o sistema.
+    • Projetar regras requer uma compreensão profunda de como uma decisão deve ser tomada por um especialista humano.
+Um exemplo de onde essa abordagem codificada manualmente falharia é na detecção de rostos em imagens. Hoje, todo smartphone pode detectar um rosto em uma imagem. No entanto, a detecção de rostos era um problema não resolvido até recentemente, em 2001. O principal problema é que a maneira como os pixels (que formam uma imagem em um computador) são “percebidos” pelo computador é muito diferente de como os humanos percebem um rosto. Essa diferença na representação torna basicamente impossível para um humano criar um bom conjunto de regras para descrever o que constitui um rosto em uma imagem digital.
+Usando aprendizado de máquina, no entanto, simplesmente apresentar a um programa uma grande coleção de imagens de rostos é suficiente para que um algoritmo determine quais características são necessárias para identificar um rosto.
+Problemas que o Aprendizado de Máquina Pode Resolver
+Os tipos mais bem-sucedidos de algoritmos de aprendizado de máquina são aqueles que automatizam processos de tomada de decisão generalizando a partir de exemplos conhecidos. Nesse contexto, conhecido como aprendizado supervisionado, o usuário fornece ao algoritmo pares de entradas e saídas desejadas, e o algoritmo encontra uma maneira de produzir a saída desejada dada uma entrada. Em particular, o algoritmo é capaz de criar uma saída para uma entrada que nunca viu antes, sem qualquer ajuda de um humano. Voltando ao nosso exemplo de classificação de spam, usando aprendizado de máquina, o usuário fornece ao algoritmo um grande número de e-mails (que são a entrada), juntamente com informações sobre se algum desses e-mails é spam (que é a saída desejada). Dado um novo e-mail, o algoritmo então produzirá uma previsão sobre se o novo e-mail é spam.
+Algoritmos de aprendizado de máquina que aprendem a partir de pares de entrada/saída são chamados de algoritmos de aprendizado supervisionado porque um “professor” fornece supervisão aos algoritmos na forma das saídas desejadas para cada exemplo do qual eles aprendem. Embora criar um conjunto de dados de entradas e saídas seja frequentemente um processo manual trabalhoso, os algoritmos de aprendizado supervisionado são bem compreendidos e seu desempenho é fácil de medir. Se sua aplicação puder ser formulada como um problema de aprendizado supervisionado, e você for capaz de criar um conjunto de dados de entradas e saídas correspondentes, você poderá usar aprendizado de máquina para automatizar a tarefa.
+criar um conjunto de dados que inclua o resultado desejado, o aprendizado de máquina provavelmente será capaz de resolver seu problema. Exemplos de tarefas de aprendizado de máquina supervisionado incluem:
+Identificação do código postal a partir de dígitos manuscritos em um envelope Aqui, a entrada é uma digitalização da caligrafia e a saída desejada são os dígitos reais do código postal. Para criar um conjunto de dados para construir um modelo de aprendizado de máquina, você precisa coletar muitos envelopes. Então, você mesmo pode ler os códigos postais e armazenar os dígitos como seus resultados desejados.
+Determinação se um tumor é benigno com base em uma imagem médica Aqui, a entrada é a imagem, e a saída é se o tumor é benigno. Para criar um conjunto de dados para construir um modelo, você precisa de um banco de dados de imagens médicas. Você também precisa da opinião de um especialista, então um médico precisa olhar todas as imagens e decidir quais tumores são benignos e quais não são. Pode até ser necessário fazer um diagnóstico adicional além do conteúdo da imagem para determinar se o tumor na imagem é canceroso ou não.
+Detecção de atividade fraudulenta em transações de cartão de crédito Aqui, a entrada é um registro da transação do cartão de crédito, e a saída é se é provável que seja fraudulenta ou não. Supondo que você seja a entidade que distribui os cartões de crédito, coletar um conjunto de dados significa armazenar todas as transações e registrar se um usuário relata alguma transação como fraudulenta.
+Uma coisa interessante a notar sobre esses exemplos é que, embora as entradas e saídas pareçam bastante diretas, o processo de coleta de dados para essas três tarefas é vastamente diferente. Embora ler envelopes seja trabalhoso, é fácil e barato. Obter imagens médicas e diagnósticos, por outro lado, não só requer maquinário caro, mas também conhecimento especializado raro e caro, sem mencionar as preocupações éticas e questões de privacidade. No exemplo de detecção de fraude em cartões de crédito, a coleta de dados é muito mais simples. Seus clientes fornecerão a saída desejada, pois eles relatarão fraudes. Tudo o que você precisa fazer para obter os pares de entrada/saída de atividades fraudulentas e não fraudulentas é esperar.
+Algoritmos não supervisionados são o outro tipo de algoritmo que abordaremos neste livro. No aprendizado não supervisionado, apenas os dados de entrada são conhecidos, e nenhuma saída conhecida é fornecida ao algoritmo. Embora existam muitas aplicações bem-sucedidas desses métodos, eles geralmente são mais difíceis de entender e avaliar.
+Exemplos de aprendizado não supervisionado incluem:
+Identificação de tópicos em um conjunto de postagens de blog Se você tem uma grande coleção de dados de texto, pode querer resumi-la e encontrar temas predominantes nela. Você pode não saber de antemão quais são esses tópicos ou quantos tópicos podem existir. Portanto, não há saídas conhecidas.
+Segmentar clientes em grupos com preferências semelhantes Dado um conjunto de registros de clientes, você pode querer identificar quais clientes são semelhantes e se existem grupos de clientes com preferências semelhantes. Para um site de compras, esses grupos podem ser "pais", "ratinhos de biblioteca" ou "gamers". Como você não sabe de antemão quais podem ser esses grupos, ou mesmo quantos existem, você não tem saídas conhecidas.
+Detectar padrões anômalos de acesso a um site Para identificar abusos ou bugs, muitas vezes é útil encontrar padrões de acesso que são diferentes do normal. Cada padrão anômalo pode ser muito diferente, e você pode não ter quaisquer instâncias registradas de comportamento anômalo. Como, neste exemplo, você apenas observa o tráfego e não sabe o que constitui comportamento normal e anormal, este é um problema não supervisionado.
+Para tarefas de aprendizado supervisionado e não supervisionado, é importante ter uma representação de seus dados de entrada que um computador possa entender. Muitas vezes é útil pensar nos seus dados como uma tabela. Cada ponto de dados sobre o qual você quer fazer uma análise (cada e-mail, cada cliente, cada transação) é uma linha, e cada propriedade que descreve esse ponto de dados (por exemplo, a idade de um cliente ou o valor ou local de uma transação) é uma coluna. Você pode descrever usuários pela sua idade, seu gênero, quando criaram uma conta e com que frequência compraram em sua loja online. Você pode descrever a imagem de um tumor pelos valores de escala de cinza de cada pixel, ou talvez usando o tamanho, forma e cor do tumor.
+Cada entidade ou linha aqui é conhecida como uma amostra (ou ponto de dados) em aprendizado de máquina, enquanto as colunas - as propriedades que descrevem essas entidades - são chamadas de características. Mais adiante neste livro, entraremos em mais detalhes sobre o tema de construir uma boa representação dos seus dados, que é chamado de extração de características ou engenharia de características. Você deve ter em mente, no entanto, que nenhum algoritmo de aprendizado de máquina será capaz de fazer uma previsão com base em dados para os quais não tem informação. Por exemplo, se a única característica que você tem para um paciente é o sobrenome, nenhum algoritmo será capaz de prever seu gênero. Essa informação simplesmente não está contida nos seus dados. Se você adicionar outra característica que contenha o primeiro nome do paciente, você terá muito mais sorte, pois muitas vezes é possível identificar o gênero pelo primeiro nome de uma pessoa.
+Conhecendo Sua Tarefa e Conhecendo Seus Dados Possivelmente, a parte mais importante no processo de aprendizado de máquina é entender os dados com os quais você está trabalhando e como eles se relacionam com a tarefa que você quer resolver. Não será eficaz escolher aleatoriamente um algoritmo e aplicar seus dados a ele. É necessário entender o que está acontecendo no seu conjunto de dados antes de começar a construir um modelo. Cada algoritmo é diferente em termos do tipo de dado e do contexto do problema para o qual funciona melhor. Enquanto você está construindo uma solução de aprendizado de máquina, você deve responder, ou pelo menos manter em mente, as seguintes perguntas:
+• Que pergunta(s) estou tentando responder? Eu acho que os dados coletados podem responder a essa pergunta? • Qual é a melhor maneira de formular minha(s) pergunta(s) como um problema de aprendizado de máquina? • Eu coletei dados suficientes para representar o problema que quero resolver? • Quais características dos dados eu extraí e essas características permitirão as previsões corretas? • Como vou medir o sucesso na minha aplicação? • Como a solução de aprendizado de máquina interagirá com outras partes da minha pesquisa ou produto comercial?
+Em um contexto mais amplo, os algoritmos e métodos em aprendizado de máquina são apenas uma parte de um processo maior para resolver um problema específico, e é bom manter a visão geral em mente o tempo todo. Muitas pessoas passam muito tempo construindo soluções complexas de aprendizado de máquina, apenas para descobrir que não resolvem o problema certo. Quando se aprofunda nos aspectos técnicos do aprendizado de máquina (como faremos neste livro), é fácil perder de vista os objetivos finais. Embora não discutamos as perguntas listadas aqui em detalhe, ainda encorajamos você a manter em mente todas as suposições que você pode estar fazendo, explicitamente ou implicitamente, quando começar a construir modelos de aprendizado de máquina.
+Por que Python? Python se tornou a língua franca para muitas aplicações de ciência de dados. Ele combina o poder das linguagens de programação de uso geral com a facilidade de uso de linguagens de script específicas de domínio, como MATLAB ou R. Python possui bibliotecas para carregamento de dados, visualização, estatísticas, processamento de linguagem natural, processamento de imagens e mais. Esta vasta caixa de ferramentas fornece aos cientistas de dados uma ampla gama de funcionalidades de uso geral e específico. Uma das principais vantagens de usar Python é a capacidade de interagir diretamente com o código, usando um terminal ou outras ferramentas como o Jupyter Notebook, que veremos em breve. O aprendizado de máquina e a análise de dados são processos fundamentalmente iterativos, nos quais os dados impulsionam a análise. É essencial para esses processos ter ferramentas que permitam iteração rápida e interação fácil. Como uma linguagem de programação de uso geral, Python também permite a criação de interfaces gráficas de usuário (GUIs) complexas e serviços web, além de integração em sistemas existentes.
+scikit-learn scikit-learn é um projeto de código aberto, o que significa que é gratuito para usar e distribuir, e qualquer pessoa pode obter facilmente o código-fonte para ver o que está acontecendo por trás das cenas.
+Instalação do scikit-learn
+O scikit-learn depende de dois outros pacotes Python, NumPy e SciPy. Para plotagem e desenvolvimento interativo, você também deve instalar matplotlib, IPython e o Jupyter Notebook. Recomendamos o uso de uma das seguintes distribuições Python predefinidas, que fornecerão os pacotes necessários:
+Anaconda Uma distribuição Python feita para processamento de dados em larga escala, análises preditivas e computação científica. Anaconda vem com NumPy, SciPy, matplotlib, pandas, IPython, Jupyter Notebook e scikit-learn. Disponível para Mac OS, Windows e Linux, é uma solução muito conveniente e é a que sugerimos para pessoas sem uma instalação existente dos pacotes científicos do Python. Anaconda agora também inclui a biblioteca comercial Intel MKL gratuitamente. Usar MKL (o que é feito automaticamente quando o Anaconda é instalado) pode oferecer melhorias significativas de velocidade para muitos algoritmos no scikit-learn.
+Enthought Canopy Outra distribuição Python para computação científica. Esta vem com NumPy, SciPy, matplotlib, pandas e IPython, mas a versão gratuita não vem com scikit-learn. Se você faz parte de uma instituição acadêmica que concede diplomas, pode solicitar uma licença acadêmica e obter acesso gratuito à versão paga do Enthought Canopy. O Enthought Canopy está disponível para Python 2.7.x e funciona no Mac OS, Windows e Linux.
+Python(x,y) Uma distribuição Python gratuita para computação científica, especificamente para Windows. Python(x,y) vem com NumPy, SciPy, matplotlib, pandas, IPython e scikit-learn.
+Se você já tem uma instalação do Python configurada, você pode usar o pip para instalar todos esses pacotes:
+bash
+$ pip install numpy scipy matplotlib ipython scikit-learn pandas
+Bibliotecas e Ferramentas Essenciais
+Entender o que é o scikit-learn e como usá-lo é importante, mas existem algumas outras bibliotecas que vão melhorar sua experiência. O scikit-learn é construído sobre as bibliotecas científicas NumPy e SciPy. Além do NumPy e SciPy, estaremos usando o pandas e o matplotlib. Também vamos introduzir o Jupyter Notebook, que é um ambiente de programação interativo baseado em navegador. Aqui está um breve resumo do que você precisa saber sobre essas ferramentas para aproveitar ao máximo o scikit-learn.
+Jupyter Notebook
+O Jupyter Notebook é um ambiente interativo para executar código no navegador. É uma ótima ferramenta para análise exploratória de dados e é amplamente utilizado por cientistas de dados. Embora o Jupyter Notebook suporte muitas linguagens de programação, nós só precisamos do suporte para Python. O Jupyter Notebook facilita a incorporação de código, texto e imagens, e na verdade todo este livro foi escrito como um Jupyter Notebook. Todos os exemplos de código que incluímos podem ser baixados do GitHub.
+NumPy
+NumPy é um dos pacotes fundamentais para computação científica em Python. Ele contém funcionalidades para arrays multidimensionais, funções matemáticas de alto nível como operações de álgebra linear e a transformada de Fourier, e geradores de números pseudoaleatórios.
+No scikit-learn, o array NumPy é a estrutura de dados fundamental. O scikit-learn recebe dados na forma de arrays NumPy. Qualquer dado que você estiver usando precisará ser convertido em um array NumPy. A funcionalidade principal do NumPy é a classe ndarray, um array multidimensional (n-dimensional). Todos os elementos do array devem ser do mesmo tipo. Um array NumPy se parece com isso:
+Vamos usar o NumPy frequentemente neste livro, e nos referiremos aos objetos da classe ndarray do NumPy como “arrays do NumPy” ou simplesmente “arrays”.
+SciPy é uma coleção de funções para computação científica em Python. Ela oferece, entre outras funcionalidades, rotinas avançadas de álgebra linear, otimização de funções matemáticas, processamento de sinais, funções matemáticas especiais e distribuições estatísticas. O scikit-learn utiliza a coleção de funções do SciPy para implementar seus algoritmos. A parte mais importante do SciPy para nós é o scipy.sparse: isso fornece matrizes esparsas, que são outra representação usada para dados no scikit-learn. Matrizes esparsas são utilizadas sempre que queremos armazenar um array 2D que contém principalmente zeros.
+Geralmente, não é possível criar representações densas de dados esparsos (pois não caberiam na memória), então precisamos criar representações esparsas diretamente. Aqui está uma maneira de criar a mesma matriz esparsa de antes, usando o formato COO:
+More details on SciPy sparse matrices can be found in the SciPy Lecture Notes. tradução para português
+matplotlib é a principal biblioteca de plotagem científica em Python. Ela fornece funções para criar visualizações de qualidade para publicações, como gráficos de linhas, histogramas, gráficos de dispersão, entre outros. Visualizar seus dados e diferentes aspectos de sua análise pode lhe proporcionar insights importantes, e usaremos o matplotlib para todas as nossas visualizações. Ao trabalhar no Jupyter Notebook, você pode exibir figuras diretamente no navegador usando os comandos %matplotlib notebook e %matplotlib inline. Recomendamos usar %matplotlib notebook, que fornece um ambiente interativo (embora estejamos usando %matplotlib inline para produzir este livro). Por exemplo, este código produz o gráfico na Figura 1-1:
+pandas é uma biblioteca Python para manipulação e análise de dados. É construída em torno de uma estrutura de dados chamada DataFrame, que é modelada após o DataFrame do R. Simplificando, um DataFrame do pandas é uma tabela, semelhante a uma planilha do Excel. pandas oferece uma ampla gama de métodos para modificar e operar nessa tabela; em particular, permite consultas e junções de tabelas semelhantes às do SQL. Em contraste com o NumPy, que exige que todas as entradas em uma matriz sejam do mesmo tipo, o pandas permite que cada coluna tenha um tipo separado (por exemplo, inteiros, datas, números de ponto flutuante e strings). Outra ferramenta valiosa fornecida pelo pandas é a sua capacidade de ingerir uma grande variedade de formatos de arquivos e bancos de dados, como SQL, arquivos Excel e arquivos de valores separados por vírgula (CSV). Entrar em detalhes sobre a funcionalidade do pandas está fora do escopo deste livro. No entanto, Python for Data Analysis de Wes McKinney (O'Reilly, 2012) fornece um ótimo guia. Aqui está um pequeno exemplo de criação de um DataFrame usando um dicionário:
+mglearn Este livro vem com um código complementar, que você pode encontrar no GitHub. O código complementar inclui não apenas todos os exemplos mostrados neste livro, mas também a biblioteca mglearn. Esta é uma biblioteca de funções utilitárias que escrevemos para este livro, para que não sobrecarreguemos nossas listagens de código com detalhes de plotagem e carregamento de dados. Se você estiver interessado, pode procurar todas as funções no repositório, mas os detalhes do módulo mglearn não são realmente importantes para o material deste livro. Se você vir uma chamada para mglearn no código, geralmente é uma maneira de fazer um gráfico bonito rapidamente ou de obter alguns dados interessantes.
+Ao longo do livro, fazemos amplo uso de NumPy, matplotlib e pandas. Todo o código assumirá as seguintes importações:
+import numpy as np
+import matplotlib.pyplot as plt
+import pandas as pd
+import mglearn
+Também pressupomos que você executará o código em um Jupyter Notebook com o comando mágico %matplotlib notebook ou %matplotlib inline habilitado para mostrar os gráficos. Se você não estiver usando o notebook ou esses comandos mágicos, precisará chamar plt.show para mostrar realmente qualquer uma das figuras.
+Python 2 Versus Python 3 Existem duas versões principais do Python que são amplamente utilizadas no momento: Python 2 (mais precisamente, 2.7) e Python 3 (sendo a versão mais recente a 3.5 no momento da redação). Isso às vezes leva a alguma confusão. O Python 2 não é mais desenvolvido ativamente, mas como o Python 3 contém mudanças importantes, o código em Python 2 geralmente não é executado no Python 3. Se você é novo no Python, ou está começando um novo projeto do zero, recomendamos altamente o uso da versão mais recente do Python 3 sem alterações. Se você tem um grande conjunto de código no qual confia e que está escrito para Python 2, está liberado de atualizar por enquanto. No entanto, você deve tentar migrar para o Python 3 o mais rápido possível. Ao escrever qualquer código novo, é bastante fácil escrever código que seja executado no Python 2 e no Python 3.2 Se você não precisa interagir com software legado, definitivamente deve usar o Python 3. Todo o código neste livro está escrito de forma que funcione para ambas as versões. No entanto, a saída exata pode diferir ligeiramente no Python 2.
+Versões Usadas neste Livro Estamos utilizando as seguintes versões das bibliotecas mencionadas anteriormente neste livro:
+
+Embora não seja importante coincidir exatamente com essas versões, você deve ter uma versão do scikit-learn que seja pelo menos tão recente quanto a que usamos. Agora que tudo está configurado, vamos mergulhar em nossa primeira aplicação de aprendizado de máquina.
+Este livro pressupõe que você tenha a versão 0.18 ou posterior do scikit-learn. O módulo model_selection foi adicionado na versão 0.18 e, se você estiver utilizando uma versão anterior do scikit-learn, precisará ajustar os imports deste módulo.
+Uma Primeira Aplicação: Classificando Espécies de Íris Nesta seção, vamos passar por uma aplicação simples de aprendizado de máquina e criar nosso primeiro modelo. No processo, introduziremos alguns conceitos e termos essenciais. Vamos supor que uma botânica amadora esteja interessada em distinguir as espécies de algumas flores de íris que ela encontrou. Ela coletou algumas medidas associadas a cada íris: o comprimento e a largura das pétalas e o comprimento e a largura dos sépalas, todos medidos em centímetros (veja a Figura 1-2). Ela também possui as medidas de algumas íris que foram previamente identificadas por um botânico especialista como pertencentes às espécies setosa, versicolor ou virginica. Para essas medidas, ela pode ter certeza de qual espécie cada íris pertence. Vamos supor que essas sejam as únicas espécies que nossa botânica amadora encontrará na natureza. Nosso objetivo é construir um modelo de aprendizado de máquina que possa aprender com as medidas dessas íris cuja espécie é conhecida, para que possamos prever a espécie de uma nova íris.
+artes da flor de íris
+Como temos medidas para as quais conhecemos a espécie correta da íris, este é um problema de aprendizado supervisionado. Neste problema, queremos prever uma das várias opções (a espécie da íris). Este é um exemplo de problema de classificação. As possíveis saídas (diferentes espécies de íris) são chamadas de classes. Cada íris no conjunto de dados pertence a uma das três classes, então este problema é um problema de classificação de três classes. A saída desejada para um único ponto de dados (uma íris) é a espécie desta flor. Para um ponto de dados específico, a espécie à qual pertence é chamada de seu rótulo.
+Conhecendo os Dados
+Os dados que usaremos neste exemplo são o conjunto de dados Iris, um conjunto de dados clássico em aprendizado de máquina e estatística. Ele está incluído no scikit-learn no módulo datasets. Podemos carregá-lo chamando a função load_iris.
+O objeto íris retornado pelo load_iris é um objeto Bunch, que é muito semelhante a um dicionário. Ele contém chaves e valores:
+O valor da chave DESCR é uma breve descrição do conjunto de dados. Mostramos o início da descrição aqui (sinta-se à vontade para procurar o restante por conta própria):
+Observamos que o array contém medições para 150 flores diferentes. Lembre-se de que os itens individuais são chamados de amostras em aprendizado de máquina, e suas propriedades são chamadas de características. A forma do array de dados é o número de amostras multiplicado pelo número de características. Esta é uma convenção no scikit-learn, e seus dados sempre serão assumidos nessa forma. Aqui estão os valores das características para as primeiras cinco amostras:
+
+A partir destes dados, podemos ver que todas as cinco primeiras flores têm uma largura de pétala de 0.2 cm e que a primeira flor tem o sépala mais longo, com 5.1 cm. O array target contém as espécies de cada uma das flores medidas, também como um array NumPy:
+Os significados dos números são dados pelo array iris['target_names']: 0 significa setosa, 1 significa versicolor e 2 significa virginica.
+Medindo o Sucesso: Dados de Treinamento e Teste Queremos construir um modelo de aprendizado de máquina a partir desses dados que possa prever a espécie da íris para um novo conjunto de medidas. Mas antes de podermos aplicar nosso modelo a novas medidas, precisamos saber se ele realmente funciona - ou seja, se devemos confiar em suas previsões. Infelizmente, não podemos usar os dados que usamos para construir o modelo para avaliá-lo. Isso ocorre porque nosso modelo sempre pode simplesmente lembrar o conjunto de treinamento inteiro e, portanto, sempre preverá o rótulo correto para qualquer ponto no conjunto de treinamento. Esse "lembrar" não nos indica se nosso modelo generalizará bem (em outras palavras, se também se sairá bem em novos dados). Para avaliar o desempenho do modelo, mostramos a ele novos dados (dados que ele não viu antes) para os quais temos rótulos. Isso geralmente é feito dividindo os dados rotulados que coletamos (aqui, nossas 150 medições de flores) em duas partes. Uma parte dos dados é usada para construir nosso modelo de aprendizado de máquina e é chamada de dados de treinamento ou conjunto de treinamento. O restante dos dados será usado para avaliar o quão bem o modelo funciona; isso é chamado de dados de teste, conjunto de teste ou conjunto de retenção. scikit-learn contém uma função que embaralha o conjunto de dados e o divide para você: a função train_test_split. Esta função extrai 75% das linhas nos dados como o conjunto de treinamento, juntamente com os rótulos correspondentes para esses dados. Os 25% restantes dos dados, juntamente com os rótulos restantes, são declarados como o conjunto de teste. Decidir quanto dados você deseja colocar no conjunto de treinamento e no conjunto de teste, respectivamente, é algo arbitrário, mas usar um conjunto de teste contendo 25% dos dados é uma boa regra prática. No scikit-learn, os dados são geralmente denotados com um X maiúsculo, enquanto os rótulos são denotados por um y minúsculo. Isso é inspirado na formulação padrão f(x) = y em matemática, onde x é a entrada para uma função e y é a saída. Seguindo mais convenções da matemática, usamos um X maiúsculo porque os dados são uma matriz bidimensional (uma matriz) e um y minúsculo porque o alvo é uma matriz unidimensional (um vetor). Vamos chamar o train_test_split em nossos dados e atribuir as saídas usando essa nomenclatura:
+Antes de fazer a divisão, a função train_test_split embaralha o conjunto de dados usando um gerador de números pseudoaleatórios. Se apenas pegássemos os últimos 25% dos dados como conjunto de teste, todos os pontos de dados teriam o rótulo 2, já que os pontos de dados estão classificados pelo rótulo (veja a saída para iris['target'] mostrada anteriormente). Usar um conjunto de teste contendo apenas uma das três classes não nos diria muito sobre o quão bem nosso modelo generaliza, então embaralhamos nossos dados para garantir que os dados de teste contenham dados de todas as classes. Para garantir que obteremos a mesma saída se executarmos a mesma função várias vezes, fornecemos ao gerador de números pseudoaleatórios uma semente fixa usando o parâmetro random_state. Isso tornará o resultado determinístico, então esta linha sempre terá o mesmo resultado. Sempre fixaremos o random_state desta forma ao usar procedimentos randomizados neste livro. A saída da função train_test_split é X_train, X_test, y_train e y_test, que são todos arrays NumPy. X_train contém 75% das linhas do conjunto de dados, e X_test contém os 25% restantes:
+
+Primeiras Coisas Primeiro: Olhe Para Seus Dados Antes de construir um modelo de aprendizado de máquina, muitas vezes é uma boa ideia inspecionar os dados, para ver se a tarefa é facilmente solucionável sem aprendizado de máquina, ou se a informação desejada pode não estar contida nos dados. Além disso, inspecionar seus dados é uma boa maneira de encontrar anormalidades e peculiaridades. Talvez algumas de suas íris tenham sido medidas usando polegadas e não centímetros, por exemplo. No mundo real, inconsistências nos dados e medições inesperadas são muito comuns. Uma das melhores maneiras de inspecionar os dados é visualizá-los. Uma maneira de fazer isso é usando um gráfico de dispersão. Um gráfico de dispersão dos dados coloca uma característica ao longo do eixo x e outra ao longo do eixo y, e desenha um ponto para cada ponto de dados. Infelizmente, as telas de computador têm apenas duas dimensões, o que nos permite plotar apenas duas (ou talvez três) características de cada vez. É difícil plotar conjuntos de dados com mais de três características desta forma. Uma maneira de contornar esse problema é fazer um gráfico de pares, que analisa todos os pares possíveis de características. Se você tiver um pequeno número de características, como as quatro que temos aqui, isso é bastante razoável. No entanto, você deve ter em mente que um gráfico de pares não mostra a interação de todas as características de uma vez, então alguns aspectos interessantes dos dados podem não ser revelados ao visualizá-los dessa maneira. A Figura 1-3 é um gráfico de pares das características no conjunto de treinamento. Os pontos de dados são coloridos de acordo com a espécie à qual a íris pertence. Para criar o gráfico, primeiro convertemos a matriz NumPy em um DataFrame do pandas. O pandas tem uma função para criar gráficos de pares chamada scatter_matrix. A diagonal desta matriz é preenchida com histogramas de cada característica:
+
+Figura 1-3. Gráfico de pares do conjunto de dados da íris, colorido por rótulo de classe
+A partir dos gráficos, podemos ver que as três classes parecem estar relativamente bem separadas usando as medições do sépala e da pétala. Isso significa que um modelo de aprendizado de máquina provavelmente será capaz de aprender a separá-las.
+Construindo Seu Primeiro Modelo: k-Vizinhos Mais Próximos
+Agora podemos começar a construir o modelo de aprendizado de máquina real. Existem muitos algoritmos de classificação no scikit-learn que poderíamos usar. Aqui usaremos um classificador de k-vizinhos mais próximos, que é fácil de entender. A construção deste modelo consiste apenas em armazenar o conjunto de treinamento. Para fazer uma previsão para um novo ponto de dados, o algoritmo encontra o ponto no conjunto de treinamento que está mais próximo do novo ponto. Em seguida, atribui o rótulo deste ponto de treinamento ao novo ponto de dados.
+O k em k-vizinhos mais próximos significa que, em vez de usar apenas o vizinho mais próximo do novo ponto de dados, podemos considerar qualquer número fixo k de vizinhos no treinamento (por exemplo, os três ou cinco vizinhos mais próximos). Em seguida, podemos fazer uma previsão usando a classe majoritária entre esses vizinhos. Entraremos em mais detalhes sobre isso no Capítulo 2; por enquanto, usaremos apenas um único vizinho. Todos os modelos de aprendizado de máquina no scikit-learn são implementados em suas próprias classes, que são chamadas de classes Estimator. O algoritmo de classificação de k-vizinhos mais próximos é implementado na classe KNeighborsClassifier no módulo neighbors. Antes de podermos usar o modelo, precisamos instanciar a classe em um objeto. É aqui que definiremos quaisquer parâmetros do modelo. O parâmetro mais importante de KNeighborsClassifier é o número de vizinhos, que definiremos como 1:
+O objeto knn encapsula o algoritmo que será usado para construir o modelo a partir dos dados de treinamento, bem como o algoritmo para fazer previsões sobre novos pontos de dados. Ele também conterá as informações que o algoritmo extraiu dos dados de treinamento. No caso de KNeighborsClassifier, ele apenas armazenará o conjunto de treinamento. Para construir o modelo no conjunto de treinamento, chamamos o método fit do objeto knn, que recebe como argumentos o array NumPy X_train contendo os dados de treinamento e o array NumPy y_train dos rótulos de treinamento correspondentes.
+
+O método fit retorna o próprio objeto knn (e o modifica no local), então obtemos uma representação de string do nosso classificador. A representação nos mostra quais parâmetros foram usados na criação do modelo. Quase todos eles são os valores padrão, mas você também pode encontrar n_neighbors=1, que é o parâmetro que passamos. A maioria dos modelos no scikit-learn tem muitos parâmetros, mas a maioria deles são otimizações de velocidade ou para casos de uso muito especiais. Você não precisa se preocupar com os outros parâmetros mostrados nesta representação. Imprimir um modelo scikit-learn pode produzir strings muito longas, mas não se intimide com isso. Cobriremos todos os parâmetros importantes no Capítulo 2. No restante deste livro, não mostraremos a saída de fit porque ela não contém nenhuma informação nova.
+Fazendo Previsões Agora podemos fazer previsões usando este modelo em novos dados para os quais talvez não conheçamos os rótulos corretos. Imagine que encontramos uma íris na natureza com um comprimento de sépala de 5 cm, uma largura de sépala de 2,9 cm, um comprimento de pétala de 1 cm e uma largura de pétala de 0,2 cm. Que espécie de íris seria esta? Podemos colocar esses dados em um array NumPy, novamente calculando a forma - ou seja, o número de amostras (1) multiplicado pelo número de características (4):
+
+Observe que transformamos as medições desta única flor em uma linha em um array NumPy bidimensional, pois o scikit-learn sempre espera arrays bidimensionais para os dados. Para fazer uma previsão, chamamos o método predict do objeto knn:
+
+Nosso modelo prevê que esta nova íris pertence à classe 0, o que significa que sua espécie é setosa. Mas como saber se podemos confiar em nosso modelo? Não conhecemos a espécie correta desta amostra, que é o ponto principal de construir o modelo!
+Avaliando o Modelo
+É aqui que entra o conjunto de testes que criamos anteriormente. Esses dados não foram usados para construir o modelo, mas sabemos qual é a espécie correta de cada íris no conjunto de testes.
+Portanto, podemos fazer uma previsão para cada íris nos dados de teste e compará-la com seu rótulo (a espécie conhecida). Podemos medir o quão bem o modelo funciona calculando a precisão, que é a fração de flores para as quais a espécie correta foi prevista:
+
+Para este modelo, a precisão do conjunto de teste é de cerca de 0,97, o que significa que fizemos a previsão correta para 97% das íris no conjunto de teste. Sob algumas suposições matemáticas, isso significa que podemos esperar que nosso modelo esteja correto 97% do tempo para novas íris. Para nossa aplicação de botânica amadora, esse alto nível de precisão significa que nosso modelo pode ser confiável o suficiente para ser usado. Em capítulos posteriores, discutiremos como podemos melhorar o desempenho e quais são as advertências ao ajustar um modelo.
+Resumo e Perspectivas
+Vamos resumir o que aprendemos neste capítulo. Começamos com uma breve introdução ao aprendizado de máquina e suas aplicações, em seguida, discutimos a distinção entre aprendizado supervisionado e não supervisionado e demos uma visão geral das ferramentas que usaremos neste livro. Em seguida, formulamos a tarefa de prever a qual espécie de íris uma determinada flor pertence usando medições físicas da flor. Usamos um conjunto de dados de medições que foi anotado por um especialista com as espécies corretas para construir nosso modelo, tornando isso uma tarefa de aprendizado supervisionado. Havia três possíveis espécies, setosa, versicolor ou virginica, o que tornou a tarefa um problema de classificação com três classes. As possíveis espécies são chamadas de classes no problema de classificação, e a espécie de uma única íris é chamada de seu rótulo.
+O conjunto de dados da Íris consiste em dois arrays NumPy: um contendo os dados, referido como X no scikit-learn, e outro contendo as saídas corretas ou desejadas, chamado y. O array X é um array bidimensional de características, com uma linha por ponto de dados e uma coluna por característica. O array y é um array unidimensional, que aqui contém um rótulo de classe, um inteiro variando de 0 a 2, para cada uma das amostras.
+Dividimos nosso conjunto de dados em um conjunto de treinamento, para construir nosso modelo, e um conjunto de teste, para avaliar como nosso modelo generalizará para dados novos e previamente não vistos.
+Escolhemos o algoritmo de classificação de k-vizinhos mais próximos, que faz previsões para um novo ponto de dados considerando seu(s) vizinho(s) mais próximo(s) no conjunto de treinamento. Isso é implementado na classe KNeighborsClassifier, que contém o algoritmo que constrói o modelo, bem como o algoritmo que faz uma previsão usando o modelo. Instanciamos a classe, configurando parâmetros. Em seguida, construímos o modelo chamando o método fit, passando os dados de treinamento (X_train) e as saídas de treinamento (y_train) como parâmetros. Avaliamos o modelo usando o método score, que calcula a precisão do modelo. Aplicamos o método score aos dados do conjunto de teste e aos rótulos do conjunto de teste e descobrimos que nosso modelo tem cerca de 97% de precisão, o que significa que está correto 97% do tempo no conjunto de teste.
+Isso nos deu confiança para aplicar o modelo a novos dados (em nosso exemplo, novas medições de flores) e confiar que o modelo estará correto cerca de 97% do tempo.
+Aqui está um resumo do código necessário para todo o procedimento de treinamento e avaliação.
+
+Este trecho contém o código principal para aplicar qualquer algoritmo de aprendizado de máquina usando o scikit-learn. Os métodos fit, predict e score são a interface comum para modelos supervisionados no scikit-learn, e com os conceitos introduzidos neste capítulo, você pode aplicar esses modelos a muitas tarefas de aprendizado de máquina. No próximo capítulo, iremos aprofundar sobre os diferentes tipos de modelos supervisionados no scikit-learn e como aplicá-los com sucesso.
+$ pip install numpy scipy matplotlib ipython scikit-learn pandas
+In[2]:						
+import numpy as np
+x = np.array([[1, 2, 3], [4, 5, 6]])
+print("x:\n{}".format(x))
+Out[2]:
+x:
+[[1 2 3]
+[4 5 6]]
+In[3]:
+from scipy import sparse
+# Create a 2D NumPy array with a diagonal of ones, and zeros everywhere else
+eye = np.eye(4)
+print("NumPy array:\n{}".format(eye))
+Out[3]:
+NumPy array:
+[[ 1. 0. 0. 0.]
+[ 0. 1. 0. 0.]
+[ 0. 0. 1. 0.]
+[ 0. 0. 0. 1.]]
+In[4]:
+# Convert the NumPy array to a SciPy sparse matrix in CSR format
+# Only the nonzero entries are stored
+sparse_matrix = sparse.csr_matrix(eye)
+print("\nSciPy sparse CSR matrix:\n{}".format(sparse_matrix))
+Out[4]:
+SciPy sparse CSR matrix:
+(0, 0) 1.0
+(1, 1) 1.0
+(2, 2) 1.0
+(3, 3) 1.0
+In[5]:
+data = np.ones(4)
+row_indices = np.arange(4)
+col_indices = np.arange(4)
+eye_coo = sparse.coo_matrix((data, (row_indices, col_indices)))
+print("COO representation:\n{}".format(eye_coo))
+Out[5]:
+COO representation:
+(0, 0) 1.0
+(1, 1) 1.0
+(2, 2) 1.0
+(3, 3) 1.0
+In[6]:
+%matplotlib inline
+import matplotlib.pyplot as plt
+# Generate a sequence of numbers from -10 to 10 with 100 steps in between
+x = np.linspace(-10, 10, 100)
+# Create a second array using sine
+y = np.sin(x)
+# The plot function makes a line chart of one array against another
+plt.plot(x, y, marker="x")
+In[7]:
+import pandas as pd
+# create a simple dataset of people
+data = {'Name': ["John", "Anna", "Peter", "Linda"],
+'Location' : ["New York", "Paris", "Berlin", "London"],
+'Age' : [24, 13, 53, 33]
+}
+data_pandas = pd.DataFrame(data)
+# IPython.display allows "pretty printing" of dataframes
+# in the Jupyter notebook
+display(data_pandas)
+
+Isso produz a seguinte saída
+Age Location Name
+0 24 New York John
+1 13 Paris Anna
+2 53 Berlin Peter
+3 33 London Linda
+Existem várias maneiras possíveis de consultar esta tabela. Por exemplo
+In[8]:
+#Selecione todas as linhas que têm uma coluna de idade maior que 30
+display(data_pandas[data_pandas.Age > 30])
+Age Location Name
+2 53 Berlin Peter
+3 33 London Linda
+In[9]:
+import sys
+print("Python version: {}".format(sys.version))
+import pandas as pd
+print("pandas version: {}".format(pd.__version__))
+import matplotlib
+print("matplotlib version: {}".format(matplotlib.__version__))
+import numpy as np
+print("NumPy version: {}".format(np.__version__))
+import scipy as sp
+print("SciPy version: {}".format(sp.__version__))
+import IPython
+print("IPython version: {}".format(IPython.__version__))
+import sklearn
+print("scikit-learn version: {}".format(sklearn.__version__))
+Out[9]:
+Python version: 3.5.2 |Anaconda 4.1.1 (64-bit)| (default, Jul 2 2016, 17:53:06)
+[GCC 4.4.7 20120313 (Red Hat 4.4.7-1)]
+pandas version: 0.18.1
+matplotlib version: 1.5.1
+NumPy version: 1.11.1
+SciPy version: 0.17.1
+IPython version: 5.1.0
+scikit-learn version: 0.18
+In[10]:
+from sklearn.datasets import load_iris
+iris_dataset = load_iris()
+In[11]:
+print("Keys of iris_dataset: \n{}".format(iris_dataset.keys()))
+Out[11]:
+Chaves do conjunto de dados da íris
+dict_keys(['target_names', 'feature_names', 'DESCR', 'data', 'target'])
+In[12]:
+print(iris_dataset['DESCR'][:193] + "\n...")
+Out[12]:
+Iris Plants Database
+====================
+Notes
+----
+Data Set Characteristics:
+:Number of Instances: 150 (50 in each of three classes)
+:Number of Attributes: 4 numeric, predictive att
+O valor da chave target_names é uma matriz de strings, contendo as espécies de flores que queremos prever:
+In[13]:
+print("Target names: {}".format(iris_dataset['target_names']))
+Out[13]:
+Target names: ['setosa' 'versicolor' 'virginica']
+O valor de feature_names é uma lista de strings, fornecendo a descrição de cada característica:
+In[14]:
+print("Feature names: \n{}".format(iris_dataset['feature_names']))
+Out[14]:
+Feature names:
+['sepal length (cm)', 'sepal width (cm)', 'petal length (cm)',
+'petal width (cm)']
+Os próprios dados estão contidos nos campos target e data. data contém as medidas numéricas do comprimento do sépala, largura do sépala, comprimento da pétala e largura da pétala em um array NumPy:
+In[15]:
+print("Type of data: {}".format(type(iris_dataset['data'])))
+Out[15]:
+Type of data: <class 'numpy.ndarray'>
+As linhas no array de dados correspondem a flores, enquanto as colunas representam as quatro medidas que foram obtidas para cada flor:
+
+In[16]:
+print("Shape of data: {}".format(iris_dataset['data'].shape))
+Out[16]:
+Shape of data: (150, 4)
+In[17]:
+print("First five columns of data:\n{}".format(iris_dataset['data'][:5]))
+
+Out[17]:
+First five columns of data:
+[[ 5.1 3.5 1.4 0.2]
+[ 4.9 3. 1.4 0.2]
+[ 4.7 3.2 1.3 0.2]
+[ 4.6 3.1 1.5 0.2]
+[ 5. 3.6 1.4 0.2]]
+In[18]:
+print("Type of target: {}".format(type(iris_dataset['target'])))
+Out[18]:
+Type of target: <class 'numpy.ndarray'>
+target é um array unidimensional, com uma entrada por flor:
+In[19]:
+print("Shape of target: {}".format(iris_dataset['target'].shape))
+Out[19]:
+Shape of target: (150,)
+As espécies são codificadas como inteiros de 0 a 2:
+In[20]:
+print("Target:\n{}".format(iris_dataset['target']))
+Out[20]:
+Target:
+[0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0
+0 0 0 0 0 0 0 0 0 0 0 0 0 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1
+1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 2 2 2 2 2 2 2 2 2 2 2
+2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2
+2 2]
+In[21]:
+from sklearn.model_selection import train_test_split
+X_train, X_test, y_train, y_test = train_test_split(
+iris_dataset['data'], iris_dataset['target'], random_state=0)
+In[22]:
+print("X_train shape: {}".format(X_train.shape))
+print("y_train shape: {}".format(y_train.shape))
+Out[22]:
+X_train shape: (112, 4)
+y_train shape: (112,)
+In[23]:
+print("X_test shape: {}".format(X_test.shape))
+print("y_test shape: {}".format(y_test.shape))
+Out[23]:
+X_test shape: (38, 4)
+y_test shape: (38,)
+In[24]:
+# create dataframe from data in X_train
+# label the columns using the strings in iris_dataset.feature_names
+iris_dataframe = pd.DataFrame(X_train, columns=iris_dataset.feature_names)
+# create a scatter matrix from the dataframe, color by y_train
+grr = pd.scatter_matrix(iris_dataframe, c=y_train, figsize=(15, 15), marker='o',
+hist_kwds={'bins': 20}, s=60, alpha=.8, cmap=mglearn.cm3)
+In[25]:
+from sklearn.neighbors import KNeighborsClassifier
+knn = KneighborsClassifier(n_neighbors=1)
+In[26]:
+knn.fit(X_train, y_train)
+Out[26]:
+KNeighborsClassifier(algorithm='auto', leaf_size=30, metric='minkowski',
+metric_params=None, n_jobs=1, n_neighbors=1, p=2,
+weights='uniform')
+In[27]:
+X_new = np.array([[5, 2.9, 1, 0.2]])
+print("X_new.shape: {}".format(X_new.shape))
+Out[27]:
+X_new.shape: (1, 4)
+In[28]:
+prediction = knn.predict(X_new)
+print("Prediction: {}".format(prediction))
+print("Predicted target name: {}".format(
+iris_dataset['target_names'][prediction]))
+Out[28]:
+Prediction: [0]
+Predicted target name: ['setosa']
+In[29]:
+y_pred = knn.predict(X_test)
+print("Test set predictions:\n {}".format(y_pred))
+Out[29]:
+Test set predictions:
+[2 1 0 2 0 2 0 1 1 1 2 1 1 1 1 0 1 1 0 0 2 1 0 0 2 0 0 1 1 0 2 1 0 2 2 1 0 2]
+In[30]:
+print("Test set score: {:.2f}".format(np.mean(y_pred == y_test)))
+Out[30]:
+Test set score: 0.97
+Também podemos usar o método score do objeto knn, que calculará a precisão do conjunto de teste para nós
+In[31]:
+print("Test set score: {:.2f}".format(knn.score(X_test, y_test)))
+Out[31]:
+Test set score: 0.97
+In[32]:
+X_train, X_test, y_train, y_test = train_test_split(
+iris_dataset['data'], iris_dataset['target'], random_state=0)
+knn = KNeighborsClassifier(n_neighbors=1)
+knn.fit(X_train, y_train)
+print("Test set score: {:.2f}".format(knn.score(X_test, y_test)))
+Out[32]:
+Test set score: 0.97

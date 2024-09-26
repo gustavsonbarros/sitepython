@@ -1,0 +1,30 @@
+
+@import url(../css/home.css);
+
+
+.titulo{
+    backdrop-filter: blur(20px);
+    background-color: rgb(114, 180, 158);
+    font-size: 40px;
+    border-radius: 30px;
+    font-weight: bold;
+    text-align: center;
+}
+
+div#form_fundo{
+    margin: 2% 50% 5% 5%;
+    position: absolute;
+}
+
+div#form_fundo.listaUsuarios{
+    margin: 2% 5% 5% 51%;
+    position: relative;
+    
+}
+
+div#form_frente.listaUsuarios{
+    text-align: left;
+    font-weight: bold;
+    font-size: 20px;
+    height: 200px;
+}
